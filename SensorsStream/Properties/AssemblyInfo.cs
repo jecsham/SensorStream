@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Sensors Stream")]
-[assembly: AssemblyDescription("Stream Hardware data by multiple transports")]
+[assembly: AssemblyDescription("Stream sensors data of your pc through different transports")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jecsham")]
+[assembly: AssemblyCompany("Vicesoft NR")]
 [assembly: AssemblyProduct("Sensors Stream")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
