@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using SensorsStream.Monitor;
+using SensorStream.Monitor;
 
-namespace SensorsStream.Transports
+namespace SensorStream.Transports
 {
     class Manager
     {

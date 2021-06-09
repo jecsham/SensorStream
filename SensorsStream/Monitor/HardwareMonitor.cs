@@ -1,6 +1,6 @@
 ﻿using LibreHardwareMonitor.Hardware;
 
-namespace SensorsStream.Monitor
+namespace SensorStream.Monitor
 {
     public class HardwareMonitor
     {

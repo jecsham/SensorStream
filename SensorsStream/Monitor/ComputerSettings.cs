@@ -1,4 +1,4 @@
-﻿namespace SensorsStream.Monitor
+﻿namespace SensorStream.Monitor
 {
     public class ComputerSettings
     {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace SensorsStream
+namespace SensorStream
 {
     partial class Form1
     {
@@ -14,7 +14,7 @@ namespace SensorsStream
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         /// 
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -37,6 +37,8 @@ namespace SensorsStream
             this.buttonStartStop = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBoxEnableStorage = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableMother = new System.Windows.Forms.CheckBox();
             this.checkBoxEnableNetwork = new System.Windows.Forms.CheckBox();
             this.checkBoxEnableFansCtrlers = new System.Windows.Forms.CheckBox();
             this.checkBoxEnableRAM = new System.Windows.Forms.CheckBox();
@@ -55,6 +57,7 @@ namespace SensorsStream
             this.checkBoxRunOnStartup = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.textBoxIP = new System.Windows.Forms.TextBox();
@@ -63,19 +66,19 @@ namespace SensorsStream
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBoxEnableMother = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableStorage = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonStartStop
             // 
-            this.buttonStartStop.Location = new System.Drawing.Point(174, 311);
+            this.buttonStartStop.Location = new System.Drawing.Point(182, 381);
             this.buttonStartStop.Name = "buttonStartStop";
             this.buttonStartStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStartStop.TabIndex = 0;
@@ -85,15 +88,14 @@ namespace SensorsStream
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.textBoxInterval);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.checkBoxRunOnStartup);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 234);
+            this.groupBox1.Size = new System.Drawing.Size(245, 274);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -108,12 +110,33 @@ namespace SensorsStream
             this.groupBox4.Controls.Add(this.checkBoxEnableRAM);
             this.groupBox4.Controls.Add(this.checkBoxEnableGPU);
             this.groupBox4.Controls.Add(this.checkBoxEnableCPU);
-            this.groupBox4.Location = new System.Drawing.Point(6, 137);
+            this.groupBox4.Location = new System.Drawing.Point(6, 171);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(225, 90);
+            this.groupBox4.Size = new System.Drawing.Size(233, 90);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Hardware";
+            // 
+            // checkBoxEnableStorage
+            // 
+            this.checkBoxEnableStorage.AutoSize = true;
+            this.checkBoxEnableStorage.Location = new System.Drawing.Point(153, 20);
+            this.checkBoxEnableStorage.Name = "checkBoxEnableStorage";
+            this.checkBoxEnableStorage.Size = new System.Drawing.Size(63, 17);
+            this.checkBoxEnableStorage.TabIndex = 6;
+            this.checkBoxEnableStorage.Text = "Storage";
+            this.checkBoxEnableStorage.UseVisualStyleBackColor = true;
+            this.checkBoxEnableStorage.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBoxEnableMother
+            // 
+            this.checkBoxEnableMother.AutoSize = true;
+            this.checkBoxEnableMother.Location = new System.Drawing.Point(61, 20);
+            this.checkBoxEnableMother.Name = "checkBoxEnableMother";
+            this.checkBoxEnableMother.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxEnableMother.TabIndex = 5;
+            this.checkBoxEnableMother.Text = "Motherboard";
+            this.checkBoxEnableMother.UseVisualStyleBackColor = true;
             // 
             // checkBoxEnableNetwork
             // 
@@ -174,7 +197,7 @@ namespace SensorsStream
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.checkBoxEnableWS);
             this.groupBox3.Controls.Add(this.textBoxPortWS);
-            this.groupBox3.Location = new System.Drawing.Point(116, 65);
+            this.groupBox3.Location = new System.Drawing.Point(113, 19);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(115, 66);
             this.groupBox3.TabIndex = 4;
@@ -215,7 +238,7 @@ namespace SensorsStream
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.textBoxPortUDP);
             this.groupBox2.Controls.Add(this.checkBoxEnableUDP);
-            this.groupBox2.Location = new System.Drawing.Point(9, 65);
+            this.groupBox2.Location = new System.Drawing.Point(6, 19);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(101, 66);
             this.groupBox2.TabIndex = 3;
@@ -280,13 +303,14 @@ namespace SensorsStream
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.labelStatus);
+            this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.buttonCopy);
             this.groupBox5.Controls.Add(this.textBoxIP);
             this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(12, 252);
+            this.groupBox5.Location = new System.Drawing.Point(9, 292);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(237, 57);
+            this.groupBox5.Size = new System.Drawing.Size(248, 83);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Service Info";
@@ -299,6 +323,16 @@ namespace SensorsStream
             this.labelStatus.Size = new System.Drawing.Size(47, 13);
             this.labelStatus.TabIndex = 4;
             this.labelStatus.Text = "Stopped";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 52);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "QR Code";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label5
             // 
@@ -367,32 +401,22 @@ namespace SensorsStream
             this.toolStripMenuItem2.Size = new System.Drawing.Size(78, 22);
             this.toolStripMenuItem2.Text = "Exit";
             // 
-            // checkBoxEnableMother
+            // groupBox6
             // 
-            this.checkBoxEnableMother.AutoSize = true;
-            this.checkBoxEnableMother.Location = new System.Drawing.Point(61, 20);
-            this.checkBoxEnableMother.Name = "checkBoxEnableMother";
-            this.checkBoxEnableMother.Size = new System.Drawing.Size(86, 17);
-            this.checkBoxEnableMother.TabIndex = 5;
-            this.checkBoxEnableMother.Text = "Motherboard";
-            this.checkBoxEnableMother.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEnableStorage
-            // 
-            this.checkBoxEnableStorage.AutoSize = true;
-            this.checkBoxEnableStorage.Location = new System.Drawing.Point(153, 20);
-            this.checkBoxEnableStorage.Name = "checkBoxEnableStorage";
-            this.checkBoxEnableStorage.Size = new System.Drawing.Size(63, 17);
-            this.checkBoxEnableStorage.TabIndex = 6;
-            this.checkBoxEnableStorage.Text = "Storage";
-            this.checkBoxEnableStorage.UseVisualStyleBackColor = true;
-            this.checkBoxEnableStorage.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.groupBox6.Controls.Add(this.groupBox3);
+            this.groupBox6.Controls.Add(this.groupBox2);
+            this.groupBox6.Location = new System.Drawing.Point(6, 65);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(233, 100);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Transports";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 343);
+            this.ClientSize = new System.Drawing.Size(270, 416);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStartStop);
@@ -401,7 +425,8 @@ namespace SensorsStream
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sensors Stream";
+            this.Text = "Sensor Stream";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -414,6 +439,7 @@ namespace SensorsStream
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -451,6 +477,8 @@ namespace SensorsStream
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.CheckBox checkBoxEnableMother;
         private System.Windows.Forms.CheckBox checkBoxEnableStorage;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }
 

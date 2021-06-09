@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SensorsStream
+namespace SensorStream
 {
     static class Program
     {

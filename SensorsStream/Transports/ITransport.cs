@@ -1,4 +1,4 @@
-﻿namespace SensorsStream.Transports
+﻿namespace SensorStream.Transports
 {
     interface ITransport
     {

@@ -3,21 +3,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
-using SensorsStream.Monitor;
-using SensorsStream.Transports;
+using SensorStream.Forms;
+using SensorStream.Monitor;
+using SensorStream.Transports;
 
-namespace SensorsStream
+namespace SensorStream
 {
     public partial class Form1 : Form
     {
         private Manager channelManager;
         private bool servicesStarted;
+        private QrForm qrCode;
+        private bool qrCodeIsSwown = false;
+        private readonly StartupManager startupManager;
         public Form1()
         {
             InitializeComponent();
             channelManager = new Manager();
+            startupManager = new StartupManager();
             textBoxIP.Text = LocalIPAddress().ToString();
             LoadSettigns();
+            qrCode = new QrForm();
+            notifyIcon.Visible = true;
         }
 
         private IPAddress LocalIPAddress()
@@ -81,12 +88,17 @@ namespace SensorsStream
             }
             else
             {
-                SetStatus(ServiceStatus.STOPPING);
-                servicesStarted = false;
-                channelManager.Finish();
-                buttonStartStop.Text = "Start";
-                SetStatus(ServiceStatus.STOPPED);
+                StopAll();
             }
+        }
+
+        private void StopAll()
+        {
+            SetStatus(ServiceStatus.STOPPING);
+            servicesStarted = false;
+            channelManager.Finish();
+            buttonStartStop.Text = "Start";
+            SetStatus(ServiceStatus.STOPPED);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -121,7 +133,7 @@ namespace SensorsStream
                     break;
                 case ServiceStatus.STARTED:
                     {
-                        labelStatus.Text = "Started";
+                        labelStatus.Text = "Running";
                         buttonStartStop.Text = "Stop";
                     }
                     break;
@@ -173,7 +185,8 @@ namespace SensorsStream
         private void LoadSettigns()
         {
             // Startup checkbox
-            checkBoxRunOnStartup.Checked = Properties.Settings.Default.RunOnStarup;
+            //checkBoxRunOnStartup.Checked = Properties.Settings.Default.RunOnStarup;
+            checkBoxRunOnStartup.Checked = startupManager.Startup;
 
             // transport checkboxes
             checkBoxEnableUDP.Checked = Properties.Settings.Default.UDPTransport;
@@ -199,7 +212,7 @@ namespace SensorsStream
         private void SaveSettings()
         {
             // Startup checkbox
-            Properties.Settings.Default.RunOnStarup = checkBoxRunOnStartup.Checked;
+            //Properties.Settings.Default.RunOnStarup = checkBoxRunOnStartup.Checked;
 
             // transport checkboxes
             Properties.Settings.Default.UDPTransport = checkBoxEnableUDP.Checked;
@@ -301,8 +314,19 @@ namespace SensorsStream
 
         private void checkBoxRunOnStartup_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.RunOnStarup = checkBoxRunOnStartup.Checked;
-            Properties.Settings.Default.Save();
+            try
+            {
+                startupManager.Startup = checkBoxRunOnStartup.Checked;
+                //Properties.Settings.Default.RunOnStarup = checkBoxRunOnStartup.Checked;
+                //Properties.Settings.Default.Save();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Updating the auto-startup option failed.", "Error",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                checkBoxRunOnStartup.Checked = false;
+            }
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -315,7 +339,6 @@ namespace SensorsStream
             if (this.WindowState == FormWindowState.Minimized)
             {
                 Hide();
-                notifyIcon.Visible = true;
             }
         }
 
@@ -323,7 +346,7 @@ namespace SensorsStream
         {
             Show();
             this.WindowState = FormWindowState.Normal;
-            notifyIcon.Visible = false;
+
         }
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -334,6 +357,29 @@ namespace SensorsStream
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (qrCodeIsSwown)
+            {
+                qrCode.Hide();
+                qrCodeIsSwown = false;
+            }
+            else
+            {
+                string qrData = "{ \"ip\":\"" + textBoxIP.Text + "\",\"ports\":{\"ws\":" + textBoxPortWS.Text + ",\"udp\":" + textBoxPortUDP.Text + " } }"; // {3}
+                qrCode.Top = this.Top;
+                qrCode.Left = this.Right - 14;
+                qrCode.GenerateQRCode(qrData);
+                qrCode.Show();
+                qrCodeIsSwown = true;
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopAll();
         }
     }
 }

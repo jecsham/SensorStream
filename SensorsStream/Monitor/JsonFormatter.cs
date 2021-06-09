@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace SensorsStream.Monitor
+namespace SensorStream.Monitor
 {
 
     public class Sensor

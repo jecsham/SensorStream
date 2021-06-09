@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Fleck;
 
-namespace SensorsStream.Transports
+namespace SensorStream.Transports
 {
     class WebSocketTransport : ITransport
     {
         private WebSocketServer server;
         private IWebSocketConnection socket;
-
+        private IList<IWebSocketConnection> allSockets;
         public WebSocketTransport(int port)
         {
             server = new WebSocketServer("ws://0.0.0.0:" + port);
@@ -15,29 +16,40 @@ namespace SensorsStream.Transports
         }
         public void Start()
         {
+            allSockets = new List<IWebSocketConnection>();
             server.Start(socket =>
             {
                 Console.WriteLine("Websocket Started");
                 this.socket = socket;
-                socket.OnOpen = () => Console.WriteLine("Websocket Open");
-                socket.OnClose = () => Console.WriteLine("Websocket Close");
+                socket.OnOpen = () => allSockets.Add(socket);
+                socket.OnClose = () =>
+                {
+                    //allSockets.Remove(socket);
+                };
             });
         }
 
         public void sendMessage(string msg)
         {
-            if (socket != null)
+            // broadcast
+            foreach (var socket in allSockets)
             {
-                socket.Send(msg);
+                if (socket != null)
+                {
+                    socket.Send(msg);
+                }
             }
         }
 
         public void Stop()
         {
             server.Dispose();
-            if (socket != null)
+            foreach (var socket in allSockets)
             {
-                socket.Close();
+                if (socket != null)
+                {
+                    socket.Close();
+                }
             }
             Console.WriteLine("Websocket Stopped");
         }

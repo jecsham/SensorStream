@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace SensorsStream.Transports
+namespace SensorStream.Transports
 {
     class UdpTransport : ITransport
     {
