@@ -19,31 +19,47 @@ namespace SensorStream.Transports
             allSockets = new List<IWebSocketConnection>();
             server.Start(socket =>
             {
-                Console.WriteLine("Websocket Started");
+                Console.WriteLine("New socket");
                 this.socket = socket;
                 socket.OnOpen = () => allSockets.Add(socket);
-                socket.OnClose = () =>
-                {
-                    //allSockets.Remove(socket);
-                };
+                socket.OnClose = () => { };
             });
         }
 
         public void sendMessage(string msg)
         {
             // broadcast
+            IWebSocketConnection deletableSocket = null;
             foreach (var socket in allSockets)
             {
                 if (socket != null)
                 {
-                    socket.Send(msg);
+                    if (socket.IsAvailable)
+                    {
+                        socket.Send(msg);
+                    }
+                    else
+                    {
+                        deletableSocket = socket;
+                    }
                 }
+            }
+            if (deletableSocket != null)
+            {
+                Console.WriteLine("Socket closed");
+                allSockets.Remove(deletableSocket);
             }
         }
 
         public void Stop()
         {
             server.Dispose();
+
+            for (int i = 0; i < allSockets.Count; i++)
+            {
+                allSockets[i].Close();
+            }
+
             foreach (var socket in allSockets)
             {
                 if (socket != null)
