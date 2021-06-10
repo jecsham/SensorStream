@@ -25,6 +25,7 @@ namespace SensorStream
             LoadSettigns();
             qrCode = new QrForm();
             notifyIcon.Visible = true;
+            shouldStartUp();
         }
 
         private IPAddress LocalIPAddress()
@@ -41,58 +42,74 @@ namespace SensorStream
                 .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
         }
 
+        private void shouldStartUp()
+        {
+            if (startupManager.Startup && !servicesStarted)
+            {
+                this.ShowInTaskbar = false;
+                Display(false);
+                this.WindowState = FormWindowState.Minimized;
+                StartSensorStreamService();
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (!servicesStarted)
             {
-                SetStatus(ServiceStatus.STARTING);
-                bool[] enabledServcices = new bool[2];
-                int[] prots = new int[2];
-                bool[] enabledHardware = new bool[5];
-                ComputerSettings computerSettings = new ComputerSettings();
-                TransportSettings transportSettings = new TransportSettings();
-
-                // Transports - 2
-                transportSettings.IsUDPEnabled = checkBoxEnableUDP.Checked;
-                transportSettings.IsWSEnabled = checkBoxEnableWS.Checked;
-
-                // Hardware 
-                computerSettings.IsCpuEnabled = checkBoxEnableCPU.Checked;
-                computerSettings.IsGpuEnabled = checkBoxEnableGPU.Checked;
-                computerSettings.IsMemoryEnabled = checkBoxEnableRAM.Checked;
-                computerSettings.IsMotherboardEnabled = checkBoxEnableMother.Checked;
-                computerSettings.IsControllerEnabled = checkBoxEnableFansCtrlers.Checked;
-                computerSettings.IsNetworkEnabled = checkBoxEnableNetwork.Checked;
-                computerSettings.IsStorageEnabled = checkBoxEnableStorage.Checked;
-
-                if (ValidateForm())
-                {
-                    // Services ports - 2
-                    transportSettings.UDPPort = int.Parse(textBoxPortUDP.Text);
-                    transportSettings.WSPort = int.Parse(textBoxPortWS.Text);
-
-                    float interval = float.Parse(textBoxInterval.Text);
-                    channelManager.Init(
-                        transportSettings,
-                        interval,
-                        computerSettings
-                        );
-                    servicesStarted = true;
-                    SaveSettings();
-                    SetStatus(ServiceStatus.STARTED);
-                }
-                else
-                {
-                    SetStatus(ServiceStatus.STOPPED);
-                }
+                StartSensorStreamService();
             }
             else
             {
-                StopAll();
+                StopSensorStreamService();
             }
         }
 
-        private void StopAll()
+        private void StartSensorStreamService()
+        {
+            SetStatus(ServiceStatus.STARTING);
+            bool[] enabledServcices = new bool[2];
+            int[] prots = new int[2];
+            bool[] enabledHardware = new bool[5];
+            ComputerSettings computerSettings = new ComputerSettings();
+            TransportSettings transportSettings = new TransportSettings();
+
+            // Transports - 2
+            transportSettings.IsUDPEnabled = checkBoxEnableUDP.Checked;
+            transportSettings.IsWSEnabled = checkBoxEnableWS.Checked;
+
+            // Hardware 
+            computerSettings.IsCpuEnabled = checkBoxEnableCPU.Checked;
+            computerSettings.IsGpuEnabled = checkBoxEnableGPU.Checked;
+            computerSettings.IsMemoryEnabled = checkBoxEnableRAM.Checked;
+            computerSettings.IsMotherboardEnabled = checkBoxEnableMother.Checked;
+            computerSettings.IsControllerEnabled = checkBoxEnableFansCtrlers.Checked;
+            computerSettings.IsNetworkEnabled = checkBoxEnableNetwork.Checked;
+            computerSettings.IsStorageEnabled = checkBoxEnableStorage.Checked;
+
+            if (ValidateForm())
+            {
+                // Services ports - 2
+                transportSettings.UDPPort = int.Parse(textBoxPortUDP.Text);
+                transportSettings.WSPort = int.Parse(textBoxPortWS.Text);
+
+                float interval = float.Parse(textBoxInterval.Text);
+                channelManager.Init(
+                    transportSettings,
+                    interval,
+                    computerSettings
+                    );
+                servicesStarted = true;
+                SaveSettings();
+                SetStatus(ServiceStatus.STARTED);
+            }
+            else
+            {
+                SetStatus(ServiceStatus.STOPPED);
+            }
+        }
+
+        private void StopSensorStreamService()
         {
             SetStatus(ServiceStatus.STOPPING);
             servicesStarted = false;
@@ -130,6 +147,8 @@ namespace SensorStream
                     {
                         labelStatus.Text = "Running";
                         buttonStartStop.Text = "Stop";
+                        toolStripMenuItemStart.Text = "Stop";
+                        toolStripMenuItemExit.Text = "Stop and exit";
                     }
                     break;
                 case ServiceStatus.STOPPING:
@@ -141,6 +160,8 @@ namespace SensorStream
                     {
                         labelStatus.Text = "Stopped";
                         buttonStartStop.Text = "Start";
+                        toolStripMenuItemStart.Text = "Start";
+                        toolStripMenuItemExit.Text = "Exit";
                         EnableUnsafeInputs(true);
                     }
                     break;
@@ -180,7 +201,6 @@ namespace SensorStream
         private void LoadSettigns()
         {
             // Startup checkbox
-            //checkBoxRunOnStartup.Checked = Properties.Settings.Default.RunOnStarup;
             checkBoxRunOnStartup.Checked = startupManager.Startup;
 
             // transport checkboxes
@@ -312,8 +332,6 @@ namespace SensorStream
             try
             {
                 startupManager.Startup = checkBoxRunOnStartup.Checked;
-                //Properties.Settings.Default.RunOnStarup = checkBoxRunOnStartup.Checked;
-                //Properties.Settings.Default.Save();
             }
             catch (InvalidOperationException)
             {
@@ -333,15 +351,13 @@ namespace SensorStream
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
-                Hide();
+                Display(false);
             }
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Show();
-            this.WindowState = FormWindowState.Normal;
-
+            Display(true);
         }
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -376,8 +392,49 @@ namespace SensorStream
         {
             if (servicesStarted)
             {
-                StopAll();
+                StopSensorStreamService();
             }
         }
+
+        private void toolStripMenuItemShow_Click(object sender, EventArgs e)
+        {
+            Display(true);
+        }
+
+        private void toolStripMenuItemExit_Click(object sender, EventArgs e)
+        {
+            if (servicesStarted)
+            {
+                StopSensorStreamService();
+            }
+        }
+
+        private void toolStripMenuItemStart_Click(object sender, EventArgs e)
+        {
+            if (!servicesStarted)
+            {
+                StartSensorStreamService();
+            }
+            else
+            {
+                StopSensorStreamService();
+            }
+        }
+
+        private void Display(bool value)
+        {
+            if (value)
+            {
+                Show();
+                this.ShowInTaskbar = true;
+                this.WindowState = FormWindowState.Normal;
+
+            } else
+            {
+                Hide();
+            }
+
+        }
+
     }
 }

@@ -36,14 +36,7 @@ namespace SensorStream
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonStartStop = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkBoxEnableStorage = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableMother = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableNetwork = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableFansCtrlers = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableRAM = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableGPU = new System.Windows.Forms.CheckBox();
-            this.checkBoxEnableCPU = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxEnableWS = new System.Windows.Forms.CheckBox();
@@ -52,6 +45,14 @@ namespace SensorStream
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPortUDP = new System.Windows.Forms.TextBox();
             this.checkBoxEnableUDP = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBoxEnableStorage = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableMother = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableNetwork = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableFansCtrlers = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableRAM = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableGPU = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnableCPU = new System.Windows.Forms.CheckBox();
             this.textBoxInterval = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxRunOnStartup = new System.Windows.Forms.CheckBox();
@@ -64,16 +65,16 @@ namespace SensorStream
             this.label4 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.toolStripMenuItemShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemStart = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonStartStop
@@ -100,6 +101,97 @@ namespace SensorStream
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.groupBox3);
+            this.groupBox6.Controls.Add(this.groupBox2);
+            this.groupBox6.Location = new System.Drawing.Point(6, 65);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(233, 100);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Transports";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.checkBoxEnableWS);
+            this.groupBox3.Controls.Add(this.textBoxPortWS);
+            this.groupBox3.Location = new System.Drawing.Point(113, 19);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(115, 66);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "WebSocket";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Port:";
+            // 
+            // checkBoxEnableWS
+            // 
+            this.checkBoxEnableWS.AutoSize = true;
+            this.checkBoxEnableWS.Checked = true;
+            this.checkBoxEnableWS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEnableWS.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxEnableWS.Name = "checkBoxEnableWS";
+            this.checkBoxEnableWS.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxEnableWS.TabIndex = 3;
+            this.checkBoxEnableWS.Text = "Enable";
+            this.checkBoxEnableWS.UseVisualStyleBackColor = true;
+            // 
+            // textBoxPortWS
+            // 
+            this.textBoxPortWS.Location = new System.Drawing.Point(38, 37);
+            this.textBoxPortWS.Name = "textBoxPortWS";
+            this.textBoxPortWS.Size = new System.Drawing.Size(54, 20);
+            this.textBoxPortWS.TabIndex = 3;
+            this.textBoxPortWS.Text = "8546";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.textBoxPortUDP);
+            this.groupBox2.Controls.Add(this.checkBoxEnableUDP);
+            this.groupBox2.Location = new System.Drawing.Point(6, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(101, 66);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "UDP";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Port:";
+            // 
+            // textBoxPortUDP
+            // 
+            this.textBoxPortUDP.Location = new System.Drawing.Point(38, 37);
+            this.textBoxPortUDP.Name = "textBoxPortUDP";
+            this.textBoxPortUDP.Size = new System.Drawing.Size(54, 20);
+            this.textBoxPortUDP.TabIndex = 1;
+            this.textBoxPortUDP.Text = "8545";
+            // 
+            // checkBoxEnableUDP
+            // 
+            this.checkBoxEnableUDP.AutoSize = true;
+            this.checkBoxEnableUDP.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxEnableUDP.Name = "checkBoxEnableUDP";
+            this.checkBoxEnableUDP.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxEnableUDP.TabIndex = 0;
+            this.checkBoxEnableUDP.Text = "Enable";
+            this.checkBoxEnableUDP.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -191,86 +283,6 @@ namespace SensorStream
             this.checkBoxEnableCPU.TabIndex = 0;
             this.checkBoxEnableCPU.Text = "CPU";
             this.checkBoxEnableCPU.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.checkBoxEnableWS);
-            this.groupBox3.Controls.Add(this.textBoxPortWS);
-            this.groupBox3.Location = new System.Drawing.Point(113, 19);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(115, 66);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "WebSocket";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Port:";
-            // 
-            // checkBoxEnableWS
-            // 
-            this.checkBoxEnableWS.AutoSize = true;
-            this.checkBoxEnableWS.Checked = true;
-            this.checkBoxEnableWS.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxEnableWS.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxEnableWS.Name = "checkBoxEnableWS";
-            this.checkBoxEnableWS.Size = new System.Drawing.Size(59, 17);
-            this.checkBoxEnableWS.TabIndex = 3;
-            this.checkBoxEnableWS.Text = "Enable";
-            this.checkBoxEnableWS.UseVisualStyleBackColor = true;
-            // 
-            // textBoxPortWS
-            // 
-            this.textBoxPortWS.Location = new System.Drawing.Point(38, 37);
-            this.textBoxPortWS.Name = "textBoxPortWS";
-            this.textBoxPortWS.Size = new System.Drawing.Size(54, 20);
-            this.textBoxPortWS.TabIndex = 3;
-            this.textBoxPortWS.Text = "8546";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBoxPortUDP);
-            this.groupBox2.Controls.Add(this.checkBoxEnableUDP);
-            this.groupBox2.Location = new System.Drawing.Point(6, 19);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(101, 66);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "UDP";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Port:";
-            // 
-            // textBoxPortUDP
-            // 
-            this.textBoxPortUDP.Location = new System.Drawing.Point(38, 37);
-            this.textBoxPortUDP.Name = "textBoxPortUDP";
-            this.textBoxPortUDP.Size = new System.Drawing.Size(54, 20);
-            this.textBoxPortUDP.TabIndex = 1;
-            this.textBoxPortUDP.Text = "8545";
-            // 
-            // checkBoxEnableUDP
-            // 
-            this.checkBoxEnableUDP.AutoSize = true;
-            this.checkBoxEnableUDP.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxEnableUDP.Name = "checkBoxEnableUDP";
-            this.checkBoxEnableUDP.Size = new System.Drawing.Size(59, 17);
-            this.checkBoxEnableUDP.TabIndex = 0;
-            this.checkBoxEnableUDP.Text = "Enable";
-            this.checkBoxEnableUDP.UseVisualStyleBackColor = true;
             // 
             // textBoxInterval
             // 
@@ -381,36 +393,35 @@ namespace SensorStream
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2});
+            this.toolStripMenuItemShow,
+            this.toolStripMenuItemStart,
+            this.toolStripMenuItemExit});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(79, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(156, 92);
             this.contextMenuStrip.Text = "Options";
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
-            // toolStripMenuItem1
+            // toolStripMenuItemShow
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(78, 22);
-            this.toolStripMenuItem1.Text = "Show";
+            this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
+            this.toolStripMenuItemShow.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItemShow.Text = "Show";
+            this.toolStripMenuItemShow.Click += new System.EventHandler(this.toolStripMenuItemShow_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripMenuItemExit
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(78, 22);
-            this.toolStripMenuItem2.Text = "Exit";
+            this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItemExit.Text = "Exit";
+            this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
-            // groupBox6
+            // toolStripMenuItemStart
             // 
-            this.groupBox6.Controls.Add(this.groupBox3);
-            this.groupBox6.Controls.Add(this.groupBox2);
-            this.groupBox6.Location = new System.Drawing.Point(6, 65);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(233, 100);
-            this.groupBox6.TabIndex = 6;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Transports";
+            this.toolStripMenuItemStart.Name = "toolStripMenuItemStart";
+            this.toolStripMenuItemStart.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItemStart.Text = "Start";
+            this.toolStripMenuItemStart.Click += new System.EventHandler(this.toolStripMenuItemStart_Click);
             // 
             // Form1
             // 
@@ -430,16 +441,16 @@ namespace SensorStream
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -473,12 +484,13 @@ namespace SensorStream
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShow;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
         private System.Windows.Forms.CheckBox checkBoxEnableMother;
         private System.Windows.Forms.CheckBox checkBoxEnableStorage;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStart;
     }
 }
 
