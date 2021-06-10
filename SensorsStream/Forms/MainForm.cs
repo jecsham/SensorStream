@@ -101,11 +101,6 @@ namespace SensorStream
             SetStatus(ServiceStatus.STOPPED);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            channelManager.Finish();
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
@@ -379,7 +374,10 @@ namespace SensorStream
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopAll();
+            if (servicesStarted)
+            {
+                StopAll();
+            }
         }
     }
 }
