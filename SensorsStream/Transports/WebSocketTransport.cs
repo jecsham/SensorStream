@@ -19,7 +19,6 @@ namespace SensorStream.Transports
             allSockets = new List<IWebSocketConnection>();
             server.Start(socket =>
             {
-                Console.WriteLine("New socket");
                 this.socket = socket;
                 socket.OnOpen = () => allSockets.Add(socket);
                 socket.OnClose = () => { };
@@ -46,7 +45,6 @@ namespace SensorStream.Transports
             }
             if (deletableSocket != null)
             {
-                Console.WriteLine("Socket closed");
                 allSockets.Remove(deletableSocket);
             }
         }
@@ -67,7 +65,6 @@ namespace SensorStream.Transports
                     socket.Close();
                 }
             }
-            Console.WriteLine("Websocket Stopped");
         }
     }
 }
