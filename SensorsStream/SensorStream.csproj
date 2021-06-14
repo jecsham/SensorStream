@@ -28,8 +28,8 @@
     <SupportUrl>https://sensorstream.jecsham.com/</SupportUrl>
     <ErrorReportUrl>https://sensorstream.jecsham.com</ErrorReportUrl>
     <ProductName>Sensor Stream</ProductName>
-    <PublisherName>Sham Vice Tech</PublisherName>
-    <SuiteName>Sham Vice Tech</SuiteName>
+    <PublisherName>Jecsham Castillo</PublisherName>
+    <SuiteName>Jecsham Castillo</SuiteName>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -77,6 +77,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SensorStream.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fleck, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
