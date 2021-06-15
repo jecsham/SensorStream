@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -25,6 +26,7 @@ namespace SensorStream
             LoadSettigns();
             qrCode = new QrForm();
             notifyIcon.Visible = true;
+            labelVersion.Text = ProductVersion;
             shouldStartUp();
         }
 
@@ -379,7 +381,37 @@ namespace SensorStream
             }
             else
             {
-                string qrData = "{ \"ip\":\"" + textBoxIP.Text + "\",\"ports\":{\"ws\":" + textBoxPortWS.Text + ",\"udp\":" + textBoxPortUDP.Text + " } }"; // {3}
+                if (!ValidateForm())
+                {
+                    return;
+                }
+
+                JsonFormatter jsonFormatter = new JsonFormatter(true);
+                ConfigTransport configTransport = new ConfigTransport
+                {
+                    ws = new ConfigTransportInfo
+                    {
+                        enabled = checkBoxEnableWS.Checked,
+                        port = int.Parse(textBoxPortWS.Text)
+                    },
+                    udp = new ConfigTransportInfo
+                    {
+                        enabled = checkBoxEnableUDP.Checked,
+                        port = int.Parse(textBoxPortUDP.Text)
+                    }
+                };
+                ConfigHardware configHardware = new ConfigHardware
+                {
+                    cpu = checkBoxEnableCPU.Checked,
+                    gpu = checkBoxEnableGPU.Checked,
+                    ram = checkBoxEnableRAM.Checked,
+                    motherboard = checkBoxEnableMother.Checked,
+                    fans = checkBoxEnableFansCtrlers.Checked,
+                    network = checkBoxEnableNetwork.Checked,
+                    storage = checkBoxEnableStorage.Checked
+                };
+
+                string qrData = jsonFormatter.GetSerializedConfigObject(textBoxIP.Text, float.Parse(textBoxInterval.Text), configTransport, configHardware);
                 qrCode.Top = this.Top;
                 qrCode.Left = this.Right - 14;
                 qrCode.GenerateQRCode(qrData);
@@ -429,7 +461,8 @@ namespace SensorStream
                 this.ShowInTaskbar = true;
                 this.WindowState = FormWindowState.Normal;
 
-            } else
+            }
+            else
             {
                 Hide();
             }

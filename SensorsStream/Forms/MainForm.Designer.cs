@@ -66,8 +66,9 @@ namespace SensorStream
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -398,36 +399,47 @@ namespace SensorStream
             this.toolStripMenuItemExit});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(156, 92);
+            this.contextMenuStrip.Size = new System.Drawing.Size(79, 70);
             this.contextMenuStrip.Text = "Options";
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemShow
             // 
             this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
-            this.toolStripMenuItemShow.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItemShow.Size = new System.Drawing.Size(78, 22);
             this.toolStripMenuItemShow.Text = "Show";
             this.toolStripMenuItemShow.Click += new System.EventHandler(this.toolStripMenuItemShow_Click);
-            // 
-            // toolStripMenuItemExit
-            // 
-            this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(155, 22);
-            this.toolStripMenuItemExit.Text = "Exit";
-            this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
             // toolStripMenuItemStart
             // 
             this.toolStripMenuItemStart.Name = "toolStripMenuItemStart";
-            this.toolStripMenuItemStart.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItemStart.Size = new System.Drawing.Size(78, 22);
             this.toolStripMenuItemStart.Text = "Start";
             this.toolStripMenuItemStart.Click += new System.EventHandler(this.toolStripMenuItemStart_Click);
+            // 
+            // toolStripMenuItemExit
+            // 
+            this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(78, 22);
+            this.toolStripMenuItemExit.Text = "Exit";
+            this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.labelVersion.Location = new System.Drawing.Point(9, 386);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(41, 13);
+            this.labelVersion.TabIndex = 4;
+            this.labelVersion.Text = "version";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 416);
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStartStop);
@@ -452,6 +464,7 @@ namespace SensorStream
             this.groupBox5.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -491,6 +504,7 @@ namespace SensorStream
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStart;
+        private System.Windows.Forms.Label labelVersion;
     }
 }
 
